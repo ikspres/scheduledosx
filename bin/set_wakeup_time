@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+now = Time.new
+puts now.hour
+#system("pmset repeat wakeorpoweron MTWRFSU 00:30:00") 
