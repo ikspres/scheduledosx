@@ -1,5 +1,20 @@
 #!/usr/bin/env ruby
 
-now = Time.new
-puts now.hour
-#system("pmset repeat wakeorpoweron MTWRFSU 00:30:00") 
+# Multiple wakeup times in order
+# At wakeup_times[i], it will be scheduled to be wakeup at wakeup_times[i+1]
+wakeup_times = [
+  '06:00:00',
+  '23:00:00',
+]
+
+cur_hour = Time.new.hour
+
+j = 0
+wakeup_times.each_with_index do |time, i|
+  if cur_hour == time.split(':')[0].to_i
+    j = (i+1) % wakeup_times.size
+  end
+end
+
+# schedule the next wakeup time
+system("pmset repeat wakeorpoweron MTWRFSU " + wakeup_times[j]) 

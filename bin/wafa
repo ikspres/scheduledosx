@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+require 'net/http'
+
+if ARGV.length < 1
+  puts "wafa <on | off>"
+  exit
+end
+
+addr_on = "http://192.168.0.1/cgi-bin/timepro.cgi?tmenu=wirelessconf&smenu=macauth&act=policy&wl_mode=0&bssidx=0&policy=0"
+addr_off = "http://192.168.0.1/cgi-bin/timepro.cgi?tmenu=wirelessconf&smenu=macauth&act=policy&wl_mode=0&bssidx=0&policy=2"
+
+if ARGV[0].downcase == 'on' 
+  addr = addr_on
+else
+  addr = addr_off
+end
+
+
+uri = URI(addr)
+req = Net::HTTP::Get.new(uri)
+req.basic_auth 'ikspres', 'for1mn2w'
+res = Net::HTTP.start(uri.hostname, uri.port) {|http| http.request(req) }
+#puts res.body
+puts res.message    
+
+

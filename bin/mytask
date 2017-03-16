@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+## do your taks
+puts 'hello scheduled taks'
+
+
+## set next wakeup time
+system("/Users/ikspres/dev/scheduledosx/bin/set_wakeup_time")
